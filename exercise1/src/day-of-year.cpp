@@ -1,30 +1,28 @@
 #include "day-of-year.hpp"
+#include <string>
+
+
+
 
 int dayOfYear(int month, int dayOfMonth, int year) {
-    if (month == 2) {
-        if(year)
-        dayOfMonth += 31;
-    } else if (month == 3) {
-        dayOfMonth += 59;
-    } else if (month == 4) {
-        dayOfMonth += 90;
-    } else if (month == 5) {
-        dayOfMonth += 31 + 28 + 31 + 30;
-    } else if (month == 6) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31;
-    } else if (month == 7) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30;
-    } else if (month == 8) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31;
-    } else if (month == 9) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31;
-    } else if (month == 10) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30;
-    } else if (month == 11) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31;
-    } else if (month == 12) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 31;
+    int leap_year = (year % 100 == 0 && year % 400 == 0) || (year % 4 == 0) ? 1 : 0;
+
+    int dayOfTheYear = dayOfMonth;
+    for(int i = 1; i < month; i++) {
+        if (i == 2) {
+            dayOfTheYear += 28 + leap_year;
+        } else if(i <= 7) {
+            if(i % 2 == 1) 
+                dayOfTheYear += 31;
+            else
+                dayOfTheYear += 30;
+        } else {
+            if(i % 2 == 0) 
+                dayOfTheYear += 31;
+            else
+                dayOfTheYear += 30;
+        }
     }
-    return dayOfMonth;
+    return dayOfTheYear;
 }
 
