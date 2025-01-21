@@ -1,10 +1,17 @@
 #include<exception>
 
-/*class DayOutOfBoundsException : std::exception {
+class DayOutOfBoundsException : std::exception {
 public:
-    char* what(){
+    const char* what() const noexcept override {
         return "Day out of bounds";
     }
-};*/
+};
 
- int dayOfYear(int month, int dayOfMonth, int year);
+class MonthOutOfBoundsException : std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Month out of bounds";
+    }
+};
+
+int dayOfYear(int month, int dayOfMonth, int year);

@@ -13,7 +13,7 @@ TEST(DayOfYearTestSuite, January1stIsFitstDayOfYear)
   ASSERT_EQ(dayOfYear(1, 1, 2020), 1);
 }
 
-/*TEST(Exception, DayOutOfBoundsException)
+TEST(Exception, DayOutOfBoundsException)
 {
   EXPECT_THROW({
     try{
@@ -24,4 +24,17 @@ TEST(DayOfYearTestSuite, January1stIsFitstDayOfYear)
       throw;
     }
   }, DayOutOfBoundsException);
-}*/
+}
+
+TEST(Exception, MonthOutOfBoundsException)
+{
+  EXPECT_THROW({
+    try{
+      dayOfYear(420, 1, 2020);
+    }
+    catch(const MonthOutOfBoundsException& e) {
+      EXPECT_STREQ("Month out of bounds", e.what());
+      throw;
+    }
+  }, MonthOutOfBoundsException);
+}
